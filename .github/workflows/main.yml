@@ -1,0 +1,24 @@
+name: Unzip App File
+
+on:
+  push:
+    branches:
+      - master  # Adjust to the branch you want to run the action for
+
+jobs:
+  unzip-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Unzip the app.zip file
+      run: |
+        mkdir unzipped
+        unzip app.zip -d unzipped
+    - name: Upload unzipped files as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: unzipped-app
+        path: unzipped/
